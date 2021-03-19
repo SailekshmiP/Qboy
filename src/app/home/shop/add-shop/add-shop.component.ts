@@ -11,6 +11,7 @@ import { MatOption } from '@angular/material';
 })
 export class AddShopComponent implements OnInit {
   // shopform:FormGroup;
+  
   sessiondayssRepat
   repeatsessiondays = [
     {
@@ -38,7 +39,7 @@ export class AddShopComponent implements OnInit {
 
   ]
   value;
-
+  shopcatarray:any = [];
   shopFormRegistration: FormGroup;
   submitted = false;
 
@@ -96,7 +97,7 @@ userTypeFilters = [
   ngOnInit() {
     this.shopFormRegistration = this.formbuilder.group({
       sname: ['', Validators.required],
-      scat: ['', Validators.required],
+      
       saddress: ['', Validators.required],
       sln: [''],
       sphn: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
@@ -109,10 +110,10 @@ userTypeFilters = [
       sdamnt: ['', Validators.required],
       simage: ['', Validators.required],
       pucharge: ['', Validators.required],
-      dcharge: ['', Validators.required],
-      showorhide: ['', Validators.required],
-      status: ['', Validators.required],
-      check: ['', Validators.required],
+      // dcharge: ['', Validators.required],
+      showorhide: [''],
+      status: [''],
+      check: [''],
       checkeddays: this.formbuilder.array([]),
       userType: new FormControl('')
     })
@@ -121,14 +122,19 @@ userTypeFilters = [
 
   }
   toggleAllSelection() {
+
     if (this.allSelected.selected) {
+      console.log("enter here");
+
       this.shopFormRegistration.controls.userType
         .patchValue([...this.resultscat.map(item => item._id)]);
       console.log( this.shopFormRegistration.controls.userType.value)
 
     } else {
+      console.log("enter heres");
+      
       this.shopFormRegistration.controls.userType.patchValue([]);
-
+      this.shopcatarray = this.shopFormRegistration.controls.userType.value;
       console.log( this.shopFormRegistration.controls.userType.value)
     }
   }
@@ -194,19 +200,23 @@ userTypeFilters = [
     this.currentphoto = this.files.item(0);
   }
   submit() {
+
+    this.shopcatarray= this.shopFormRegistration.controls.userType.value;
     this.submitted = true;
     this.isLoading = true;
     this.button = 'Processing';
     if (this.shopFormRegistration.invalid) {
       this.isLoading = false;
       this.button = 'submit';
+      console.log(this.shopFormRegistration.getError);
+      
       return;
     }
     else {
       this.isLoading = true;
       this.button = 'Processing';
       this.formData.append("shop_name", this.sname.toUpperCase())
-      this.formData.append("category_id", this.scat)
+    
       this.formData.append("shop_phone", this.sphn)
       this.formData.append("shop_landline", this.sln)
       this.formData.append("open_time",this.sotime)
@@ -217,7 +227,7 @@ userTypeFilters = [
       this.formData.append("shop_discount", this.sdperc)
       this.formData.append("shop_discamountamount", this.sdamnt)
       this.formData.append("pickupRate", this.pucharge)
-      this.formData.append("deliveryRate", this.dcharge)
+      this.formData.append("deliveryRate", "0")
       this.formData.append("minimum", this.movalue)
       this.formData.append("show", this.showorhide)
       this.formData.append("state", this.status)
@@ -229,7 +239,10 @@ userTypeFilters = [
         this.formData.append("locationId", this.sessiondayssRepat[i])
 
       }
-
+      for(let j=0;j<this.shopcatarray.length;j++)
+      {
+        this.formData.append("category_id", this.shopcatarray[j])
+      }
       this.easydealservice.addshop(this.formData).subscribe(
         data => {
           this.isLoading = false;

@@ -70,7 +70,7 @@ import { PreOrdersComponent } from './home/pre-orders/pre-orders.component';
 import { AddPreOrdersComponent } from './home/pre-orders/add-pre-orders/add-pre-orders.component';
 import { EditPreOrdersComponent } from './home/pre-orders/edit-pre-orders/edit-pre-orders.component';
 import { ToastrModule } from 'ngx-toastr';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { GeneralCategoryComponent } from './general-category/general-category.component';
 import { AddGeneralCategoryComponent } from './general-category/add-general-category/add-general-category.component';
 import { EditGeneralCategoryComponent } from './general-category/edit-general-category/edit-general-category.component';
@@ -105,6 +105,8 @@ import { RouterModule } from '@angular/router';
 import { RestTypeComponent } from './rest-type/rest-type.component';
 import { AddRestTypeComponent } from './rest-type/add-rest-type/add-rest-type.component';
 import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type.component';
+import { AddSublocationsComponent } from './home/pincodes/add-sublocations/add-sublocations.component';
+import { ViewSubloationsComponent } from './home/pincodes/view-subloations/view-subloations.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -197,6 +199,8 @@ import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type
     RestTypeComponent,
     AddRestTypeComponent,
     EditRestTypeComponent,
+    AddSublocationsComponent,
+    ViewSubloationsComponent,
     // MatSort
   ],
   imports: [
@@ -214,7 +218,7 @@ import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type
 
   entryComponents: [ViewOrderDetailsComponent,ViewimageComponent,ViewPreOrdersComponent],
   
-  providers: [{provide: LocationStrategy,useClass:HashLocationStrategy},],
+  providers: [{provide: LocationStrategy,useClass:HashLocationStrategy},DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

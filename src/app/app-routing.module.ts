@@ -24,8 +24,10 @@ import { GeneralShopMenuComponent } from './home/general-shop-menu/general-shop-
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { AddPincodesComponent } from './home/pincodes/add-pincodes/add-pincodes.component';
+import { AddSublocationsComponent } from './home/pincodes/add-sublocations/add-sublocations.component';
 import { EditPincodesComponent } from './home/pincodes/edit-pincodes/edit-pincodes.component';
 import { PincodesComponent } from './home/pincodes/pincodes.component';
+import { ViewSubloationsComponent } from './home/pincodes/view-subloations/view-subloations.component';
 import { AddPreOrdersComponent } from './home/pre-orders/add-pre-orders/add-pre-orders.component';
 import { PreOrdersComponent } from './home/pre-orders/pre-orders.component';
 import { AddRestaurantMenuComponent } from './home/restaurant-menu/add-restaurant-menu/add-restaurant-menu.component';
@@ -156,7 +158,9 @@ const routes: Routes = [
   {path:'restauranttype',component:RestTypeComponent},
   {path:'addrestauranttype',component:AddRestTypeComponent},
  {path:'editrestauranttype',component:EditRestTypeComponent},
- 
+ {path:'addsublocations',component:AddSublocationsComponent},
+ {path:'view-sublocations',component:ViewSubloationsComponent},
+
 
 
 
